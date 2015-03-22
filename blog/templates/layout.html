@@ -6,15 +6,9 @@
     </head>
     <body>        
         <div id="main-body">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul class=flashes>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %}
+            {% for message in get_flashed_messages() %}
+            <div class="message">{{ message }}</div>
+            {% endfor %}
             {% block body %}{% endblock %}
         </div>
     </body>
