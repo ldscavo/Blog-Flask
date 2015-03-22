@@ -14,12 +14,23 @@ toolbar = DebugToolbarExtension(app)
 def index():
     return render_template('index.html')
 
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        flash('Just kidding, that is not implemented.')
+        return render_template('index.html')
+
+    return render_template('login.html')
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         if request.form['password'] != request.form['password-confirm']:
             flash('Passwords do not match.')
             return render_template('register.html')
+
         user = User(request.form['username'], request.form['email'], request.form['password'])
         db.session.add(user)
         db.session.commit()
