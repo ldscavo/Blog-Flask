@@ -19,11 +19,11 @@ def register():
     if request.method == 'POST':
         if request.form['password'] != request.form['password-confirm']:
             flash('Passwords do not match.')
-            return_templaye('register.html')
+            return render_template('register.html')
         user = User(request.form['username'], request.form['email'], request.form['password'])
         db.session.add(user)
         db.session.commit()
-        session['user'] = user
+        session['user_id'] = user.id
 
         flash('You have been registered!')
         return render_template('index.html')
