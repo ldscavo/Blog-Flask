@@ -20,7 +20,9 @@ def register():
         if request.form['password'] != request.form['password-confirm']:
             flash('Passwords do not match.')
             return render_template('register.html')
-        user = User(request.form['username'], request.form['email'], request.form['password'])
+        user = User(request.form['username'],
+                request.form['email'],
+                request.form['password'])
         db.session.add(user)
         db.session.commit()
         session['user_id'] = user.id
