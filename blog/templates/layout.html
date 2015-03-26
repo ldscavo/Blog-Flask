@@ -9,6 +9,13 @@
             {% for message in get_flashed_messages() %}
             <div class="message">{{ message }}</div>
             {% endfor %}
+            <div>
+                {% if not session.user_id: %}
+                <a href="{{ url_for('login') }}">Login</a>
+                {% else: %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+                {% endif %}
+            </div>
             {% block body %}{% endblock %}
         </div>
     </body>
