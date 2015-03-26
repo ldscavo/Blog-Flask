@@ -10,7 +10,7 @@ class User(db.Model):
 
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
-    passwordhash = db.Column(db.String(128))
+    passwordhash = db.Column(db.String(150))
 
     def __init__(self, username, email, password):
         self.username = username

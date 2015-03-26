@@ -1,6 +1,7 @@
 from flask import Flask, request, session, g, redirect, url_for, \
                   abort, render_template, flash
 from flask_debugtoolbar import DebugToolbarExtension
+import hashlib
 
 app = Flask(__name__)
 
@@ -18,11 +19,21 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        flash('Just kidding, that is not implemented.')
-        return render_template('index.html')
-
+        password_hashed = hashlib.sha512(request.form['password']).hexdigest()
+        user = User.query.filter_by(username=request.form['username'],
+                passwordhash=password_hashed).first()
+        if user is not None:
+            session['user_id'] = user.id            
+            return render_template('index.html')
+        else:
+            flash('Username or password is not correct!')
     return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    flash('You have successfully logged out.')
+    return render_template('index.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
