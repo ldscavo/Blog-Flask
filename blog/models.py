@@ -32,8 +32,8 @@ class Post(db.Model):
 
     pub_date = db.Column(db.DateTime)
     
-    def __init__(self, author, title, body):
-        self.author = author
+    def __init__(self, author_id, title, body):
+        self.author_id = author_id
         self.title = title
         self.body = body
         self.pub_date = datetime.utcnow()
