@@ -1,5 +1,16 @@
 {% extends "layout.html" %}
 {% block title %}Home{% endblock %}
 {% block body %}
-<p>Snog in the Shrubbery!</p>
+
+{% for post in posts: %}
+<p>{{ post.title }}</p>
+<p><em>Published by {{ post.author.username }} on {{ post.pub_date }} </em></p>
+<p>{{ post.body }}</p>
+<p>({{ post.comments.count() }}) Comments
+{% endfor %}
+
+{% if not posts: %}
+<p>No posts here!</p>
+{% endif %}
+
 {% endblock %}
