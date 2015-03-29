@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
+from flask.ext.markdown import Markdown
 
 app = Flask(__name__)
 
@@ -8,6 +9,8 @@ app = Flask(__name__)
 app.debug = True
 app.config.from_pyfile('config.py')
 toolbar = DebugToolbarExtension(app)
+
+Markdown(app)
 
 import blog.controllers
 
