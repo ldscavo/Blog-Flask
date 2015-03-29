@@ -5,7 +5,7 @@
 {% for post in posts: %}
 <p>{{ post.title }}</p>
 <p><em>Published by {{ post.author.username }} on {{ post.pub_date }} </em></p>
-<p>{{ post.body }}</p>
+<p>{{ post.body|markdown }}</p>
 <p>({{ post.comments.count() }}) Comments
 {% endfor %}
 
