@@ -1,22 +1,37 @@
 <!doctype html>
 <html>
-    <head>
-        <title>{% block title %}{% endblock %} - The Blog Title</title>
-        <link href="/static/style.css" rel="stylesheet" type="text/css" />
-    </head>
-    <body>        
-        <div id="main-body">
-            {% for message in get_flashed_messages() %}
-            <div class="message">{{ message }}</div>
-            {% endfor %}
-            <div>
-                {% if not session.user_id: %}
-                <a href="{{ url_for('login') }}">Login</a>
-                {% else: %}
-                <a href="{{ url_for('logout') }}">Logout</a>
-                {% endif %}
+<head>
+    <title>{% block title %}{% endblock %} - The Blog Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+</head>
+    <body>
+        <div id="header">
+            <div id="header-container">
+                <div id="home">
+                    <a href="/">The Blog Title</a>
+                </div>
+                <div id ="login">
+                    {% if not session.user_id: %}
+                    <a href="{{ url_for('login') }}">Login</a>
+                    {% else: %}
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                    {% endif %}
+                </div>
             </div>
-            {% block body %}{% endblock %}
+        </div>
+        <div id="container">
+            <div id="main-body">
+                {% for message in get_flashed_messages() %}
+                <div class="message">{{ message }}</div>
+                {% endfor %}
+                <div>
+                </div>
+                {% block body %}{% endblock %}
+            </div>
+            <div id="footer">
+                I don't know what to put in the footer.
+            </div>
         </div>
     </body>
 </html>

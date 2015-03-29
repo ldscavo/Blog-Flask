@@ -1,4 +1,22 @@
-html { font-family:"Arial Black", Gadget, sans-serif; }
+html { font-family:"Arial Black", Gadget, sans-serif; height:100% }
+body { background:#F1FFF8; margin:0; min-height:100% }
+div { /*border:1px solid #000;*/ }
+
+#header { background:#40C581; height:70px; line-height:60px; padding:0 15px }
+#header-container { max-width:960px; margin:0 auto; }
+
+#header a { color:#BCF8DA; text-decoration:none; } 
+#home { font-size:2.0rem; font-weight:bold; float:left }
+#login { float:right; }
+
+#container { max-width:960px; margin:0 auto; }
+
+#main-body { padding:15px; min-height:250px; }
+
+#footer { background:#BCF8DA; height:20px; padding:10px }
 
 .message { width:450px; margin:0 auto; border:1px solid #000; text-align:center }
+
 label { display:block; margin-bottom:15px; }
+a { text-decoration:none; color:#428CB8; font-weight:bold; }
+a:hover { text-decoration:underline }
