@@ -27,9 +27,10 @@ class Post(db.Model):
     author = db.relationship('User',
             backref = db.backref('posts', lazy='dynamic'))
 
-    title = db.Column(db.String(80))
+    title = db.Column(db.String(150))
     body = db.Column(db.Text)
-
+    
+    slug = db.Column(db.String(80))
     pub_date = db.Column(db.DateTime)
     
     def __init__(self, author_id, title, body):
@@ -38,8 +39,19 @@ class Post(db.Model):
         self.body = body
         self.pub_date = datetime.utcnow()
         
+        self.__create_slug()
+        
     def __repr__(self):
         return '<Post %r>' % self.title
+
+    def __create_slug(self):
+        import re
+        
+        title_slug = re.sub(r'[^\w ]', '', self.title)
+        
+        slug = title_slug.lower().replace(' ', '-')
+
+        self.slug = slug
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
