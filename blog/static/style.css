@@ -2,6 +2,10 @@ html { font-family:"Arial Black", Gadget, sans-serif; height:100% }
 body { background:#F1FFF8; margin:0; min-height:100% }
 div { /*border:1px solid #000;*/ }
 
+label { display:block; margin-bottom:15px; }
+a { text-decoration:none; color:#428CB8; font-weight:bold; }
+a:hover { text-decoration:underline }
+
 #header { background:#40C581; height:70px; line-height:60px; padding:0 15px }
 #header-container { max-width:960px; margin:0 auto; }
 
@@ -11,12 +15,12 @@ div { /*border:1px solid #000;*/ }
 
 #container { max-width:960px; margin:0 auto; }
 
-#main-body { padding:15px; min-height:250px; }
+#main-body { min-height:250px; }
 
 #footer { background:#BCF8DA; height:20px; padding:10px }
 
 .message { width:450px; margin:0 auto; border:1px solid #000; text-align:center }
 
-label { display:block; margin-bottom:15px; }
-a { text-decoration:none; color:#428CB8; font-weight:bold; }
-a:hover { text-decoration:underline }
+.post { margin:5px 5px 25px 5px; padding:5px; }
+.title { font-size:1.5rem; margin:5px 0; font-weight:normal }
+.post-details { font-size:0.8rem; margin:5px 0; }
