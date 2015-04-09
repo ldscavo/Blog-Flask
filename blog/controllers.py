@@ -1,11 +1,12 @@
 from blog import app
 from blog.models import *
 from flask import render_template, flash, session, request
+from sqlalchemy.sql import extract
 import hashlib
 
 @app.route('/')
 def index():
-    posts = Post.query.all()
+    posts = Post.query.limit(5).all()
 
     return render_template('index.html', posts=posts)
 
@@ -46,6 +47,16 @@ def register():
         return render_template('index.html')
 
     return render_template('register.html')
+
+@app.route('/<int:year>/<int:month>/<int:day>/<string:slug>')
+def post(year, month, day, slug):
+    post = Post.query.filter(
+            extract('year', Post.pub_date) == year,
+            extract('month', Post.pub_date) == month,
+            extract('day', Post.pub_date) == day,
+            Post.slug == slug).first()
+    
+    return render_template('post.html', post=post)
 
 @app.route('/posts/new', methods=['GET', 'POST'])
 def new_post():

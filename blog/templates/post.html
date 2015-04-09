@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block body %}
+
+<div class="post">
+    <h3 class="title">
+        <a href="#">{{ post.title }}</a>
+    </h3>
+    <p class="post-details">{{ post.pub_date.strftime('%B %e, %Y') }} by {{ post.author.username }}</p>
+    <p>{{ post.body|markdown }}</p>
+    <div class="post-comments">
+        <a href="#">({{ post.comments.count() }}) Comments</a>
+    </div>
+</div>
+
+{% endblock %}
