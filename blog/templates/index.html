@@ -5,7 +5,7 @@
 {% for post in posts: %}
 <div class="post">
     <h3 class="title">
-        <a href="#">{{ post.title }}</a>
+        <a href="/{{ post.pub_date.strftime('%Y/%m/%d') }}/{{ post.slug }}">{{ post.title }}</a>
     </h3>
     <p class="post-details">{{ post.pub_date.strftime('%B %e, %Y') }} by {{ post.author.username }}</p>
     <p>{{ post.body|markdown }}</p>
