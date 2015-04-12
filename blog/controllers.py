@@ -1,10 +1,11 @@
 from blog import app
 from blog.models import *
-from flask import render_template, flash, session, request
+from flask import render_template, flash, session, request, \
+        redirect, url_for
 from sqlalchemy.sql import extract
 import hashlib
 
-@app.route('/')
+@app.route('/', endpoint='index')
 def index():
     posts = Post.query.limit(5).all()
 
@@ -19,7 +20,7 @@ def login():
         if user is not None:
             session['user_id'] = user.id
             flash('You have successfully logged in!')
-            return render_template('index.html')
+            return redirect(url_for('index'))
         else:
             flash('Username or password is not correct!')
     return render_template('login.html')
@@ -28,7 +29,7 @@ def login():
 def logout():
     session.pop('user_id', None)
     flash('You have successfully logged out.')
-    return render_template('index.html')
+    return redirect(url_for('index'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -44,7 +45,7 @@ def register():
         session['user_id'] = user.id
 
         flash('You have been registered!')
-        return render_template('index.html')
+        return redirect(url_for('index'))
 
     return render_template('register.html')
 
@@ -68,6 +69,6 @@ def new_post():
         db.session.commit()
 
         flash('Published successfully!')
-        return render_template('index.html')
+        return redirect(url_for('index'))
 
     return render_template('new_post.html')
