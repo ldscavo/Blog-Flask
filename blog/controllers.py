@@ -2,14 +2,18 @@ from blog import app
 from blog.models import *
 from flask import render_template, flash, session, request, \
         redirect, url_for
-from sqlalchemy.sql import extract
+from sqlalchemy.sql import extract, desc
 import hashlib
 
 @app.route('/', endpoint='index')
 def index():
-    posts = Post.query.limit(5).all()
+    return page(1)
 
-    return render_template('index.html', posts=posts)
+@app.route('/page/<int:page>')
+def page(page):
+    posts = Post.query.order_by(desc(Post.pub_date)).paginate(page, per_page=3)
+
+    return render_template('page.html', posts=posts)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

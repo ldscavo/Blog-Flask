@@ -2,7 +2,7 @@
 {% block title %}Home{% endblock %}
 {% block body %}
 
-{% for post in posts: %}
+{% for post in posts.items: %}
 <div class="post">
     <h3 class="title">
         <a href="/{{ post.pub_date.strftime('%Y/%m/%d') }}/{{ post.slug }}">{{ post.title }}</a>
@@ -15,8 +15,16 @@
 </div>
 {% endfor %}
 
-{% if not posts: %}
+{% if not posts.items: %}
 <p>No posts here!</p>
+{% endif %}
+
+{% if posts.has_prev: %}
+<a href="/page/{{ posts.prev_num }}">&laquo; Previous</a>
+{% endif %}
+
+{% if posts.has_next: %}
+<a href="/page/{{ posts.next_num }}">Next &raquo;</a>
 {% endif %}
 
 {% endblock %}
