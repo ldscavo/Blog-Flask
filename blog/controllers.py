@@ -59,7 +59,7 @@ def post(year, month, day, slug):
             extract('year', Post.pub_date) == year,
             extract('month', Post.pub_date) == month,
             extract('day', Post.pub_date) == day,
-            Post.slug == slug).first()
+            Post.slug == slug).first_or_404()
     
     return render_template('post.html', post=post)
 
