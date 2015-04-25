@@ -4,6 +4,13 @@ from flask import render_template, flash, session, request, \
         redirect, url_for
 from sqlalchemy.sql import extract, desc
 import hashlib
+from datetime import datetime
+
+@app.context_processor
+def utility_processor():
+    year = datetime.now().year
+    posts = Post.query.order_by(desc(Post.pub_date)).limit(3)
+    return dict(current_year=year, recent_posts=posts)
 
 @app.route('/', endpoint='index')
 def index():

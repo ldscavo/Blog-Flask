@@ -3,7 +3,7 @@
 <head>
     <title>{% block title %}{% endblock %} - The Blog Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
 </head>
     <body>
         <div id="header">
@@ -29,8 +29,23 @@
                 </div>
                 {% block body %}{% endblock %}
             </div>
-            <div id="footer">
-                I don't know what to put in the footer.
+            <div id="sidebar">
+                <div class="widget">
+                    <input type="text" name="q" value="Search" />
+                </div>
+                <div class="widget">
+                    <span class="widget-header">Recent Posts</span>
+                    <ul>
+                        {% for post in recent_posts: %}
+                        <li><a href="/{{ post.pub_date.strftime('%Y/%m/%d') }}/{{ post.slug }}">{{ post.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div id="footer-content">
+                &copy;{{ current_year }} by Logan Scavo. All rights reserved.
             </div>
         </div>
     </body>

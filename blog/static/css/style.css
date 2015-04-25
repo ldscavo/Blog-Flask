@@ -27,6 +27,7 @@ button:hover { background:#428CB8 }
 #main-body { min-height:250px; }
 
 #footer { background:#BCF8DA; height:20px; padding:10px; margin-top:25px }
+#footer-content { max-width:960px; margin:0 auto }
 
 .message { width:450px; margin:0 auto; border:1px solid #000; text-align:center }
 
@@ -35,3 +36,12 @@ button:hover { background:#428CB8 }
 .post { margin:5px 5px 25px 5px; padding:5px; }
 .title { font-size:1.5rem; margin:5px 0; font-weight:normal }
 .post-details { font-size:0.8rem; margin:5px 0; }
+
+#sidebar { border:1px solid #000 }
+
+@media (min-width:850px) {
+    #container { overflow:hidden }
+    #main-body { float:left; }
+    #sidebar { width:350px; float:right }
+}
+
