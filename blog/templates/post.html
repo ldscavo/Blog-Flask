@@ -6,7 +6,7 @@
     <h3 class="title">
         <a href="#">{{ post.title }}</a>
     </h3>
-    <p class="post-details">{{ post.pub_date.strftime('%B %e, %Y') }} by {{ post.author.username }}</p>
+    <span class="post-details">{{ post.pub_date.strftime('%B %e, %Y') }} by {{ post.author.username }}</span>
     <p>{{ post.body|markdown }}</p>
     <div class="post-comments">
         <a href="#">({{ post.comments.count() }}) Comments</a>

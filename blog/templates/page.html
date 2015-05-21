@@ -19,12 +19,20 @@
 <p>No posts here!</p>
 {% endif %}
 
-{% if posts.has_prev: %}
-<a href="/page/{{ posts.prev_num }}">&laquo; Previous</a>
-{% endif %}
-
-{% if posts.has_next: %}
-<a href="/page/{{ posts.next_num }}">Next &raquo;</a>
-{% endif %}
+<div class="pages">
+    {% if posts.has_prev: %}
+    <a href="/page/{{ posts.prev_num }}">&laquo; Previous</a>
+    {% endif %}
+    {% for page in posts.iter_pages(): %}
+        {% if posts.page == page: %}
+        &nbsp;{{ page }}&nbsp;
+        {% else: %}
+        &nbsp;<a href="/page/{{ page }}">{{ page }}</a>&nbsp;
+        {% endif %}
+    {% endfor %}
+    {% if posts.has_next: %}
+    <a href="/page/{{ posts.next_num }}">Next &raquo;</a>
+    {% endif %}
+</div>
 
 {% endblock %}

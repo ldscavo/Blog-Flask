@@ -16,32 +16,35 @@ input[type=submit]:hover,
 button:hover { background:#428CB8 }
 
 #header { background:#40C581; height:70px; line-height:60px; padding:0 15px; margin-bottom:15px }
-#header-container { max-width:960px; margin:0 auto; }
+#header-container { max-width:1150px; margin:0 auto; }
 
 #header a { color:#BCF8DA; text-decoration:none; } 
 #home { font-size:2.0rem; font-weight:bold; float:left }
 #login { float:right; }
 
-#container { max-width:960px; margin:0 auto; }
+#container { max-width:1150px; margin:0 auto; clear:both }
 
-#main-body { min-height:250px; }
+#main-body { min-height:250px; max-width:745px; margin:0 10px }
 
 #footer { background:#BCF8DA; height:20px; padding:10px; margin-top:25px }
-#footer-content { max-width:960px; margin:0 auto }
+#footer-content { max-width:1150px; margin:0 auto }
 
 .message { width:450px; margin:0 auto; border:1px solid #000; text-align:center }
 
 .new-post { height:150px }
 
 .post { margin:5px 5px 25px 5px; padding:5px; }
+.post p { line-height:150%; font-size:1.05rem }
 .title { font-size:1.5rem; margin:5px 0; font-weight:normal }
 .post-details { font-size:0.8rem; margin:5px 0; }
 
-#sidebar { border:1px solid #000 }
+#sidebar { /*border:1px solid #000*/ }
+.widget { margin:15px 0; padding:5px }
+#sidebar input[name=q] { width:95%; display:block; margin:0 auto; }
 
-@media (min-width:850px) {
+@media (min-width:750px) {
     #container { overflow:hidden }
-    #main-body { float:left; }
-    #sidebar { width:350px; float:right }
+    #main-body { float:left; width:70%; }
+    #sidebar { width:25%; max-width:350px; float:right }
 }
 
