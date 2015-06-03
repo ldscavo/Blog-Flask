@@ -6,10 +6,29 @@
     <h3 class="title">
         <a href="#">{{ post.title }}</a>
     </h3>
-    <p class="post-details">{{ post.pub_date.strftime('%B %e, %Y') }} by {{ post.author.username }}</p>
+    <span class="post-details">{{ post.pub_date.strftime('%B %e, %Y') }} by {{ post.author.username }}</span>
     <p>{{ post.body|markdown }}</p>
-    <div class="post-comments">
-        <a href="#">({{ post.comments.count() }}) Comments</a>
+    <div id="comments">
+        <div class="comment-list">
+            {% for comment in post.comments: %}
+            <div class="comment">
+                <div class="comment-details">
+                    <img src="http://gravatar.com/avatar/{{ comment.email_md5 }}?d=mm&r=pg&s=50" alt=""/>
+                    {{ comment.username }}<br />
+                    <span class="details">{{ comment.pub_date.strftime('%B %e, %Y at %-I:%M %P') }}</span>
+                </div>
+                {{ comment.body }}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="comment-form">
+            <form method="post">
+                <p><input type="text" name="username" placeholder="Name *" /></p>
+                <p><input type="email" name="email" placeholder="Email *" /> </p>
+                <textarea name="body" rows="12"></textarea>
+                <p><input type="submit" value="Post Comment" /></p>
+            </form>
+        </div>
     </div>
 </div>
 
