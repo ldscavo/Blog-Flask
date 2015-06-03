@@ -3,7 +3,10 @@ from flask.ext.script import Manager, Shell, Server
 from blog import app
 
 manager = Manager(app)
-manager.add_command("runserver", Server())
+
+@manager.command
+def runserver():
+    app.run(host='0.0.0.0')
 manager.add_command("shell", Shell())
 
 @manager.command
