@@ -70,6 +70,12 @@ def post(year, month, day, slug):
     
     return render_template('post.html', post=post)
 
+@app.route('/post/<int:post_id>')
+def post_by_id(post_id):
+    post = Post.query.filter(Post.id == post_id).first_or_404()
+
+    return render_template('post.html', post=post)
+
 @app.route('/posts/new', methods=['GET', 'POST'])
 def new_post():
     if request.method == 'POST':
