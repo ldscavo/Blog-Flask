@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>{% block title %}{% endblock %} - The Blog Title</title>
+    <title>{% block title %}{% endblock %} - Blog.VeryFamousDroid()</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
 </head>
@@ -9,7 +9,7 @@
         <div id="header">
             <div id="header-container">
                 <div id="home">
-                    <a href="/">The Blog Title</a>
+                    <a href="/">Blog.VeryFamousDroid()</a>
                 </div>
                 <div id ="login">
                     {% if not session.user_id: %}
@@ -45,7 +45,7 @@
         </div>
         <div id="footer">
             <div id="footer-content">
-                &copy;{{ current_year }} by Logan Scavo. All rights reserved.
+                &copy;{{ current_year }} by Logan Scavo. All rights reserved. Source code available on <a target="_blank" href="https://github.com/VeryFamousDroid/Blog-Flask">GitHub</a>.
             </div>
         </div>
     </body>
