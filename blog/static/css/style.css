@@ -39,8 +39,7 @@ button:hover { background:#428CB8 }
 .post-details { font-size:0.8rem; margin:5px 0; }
 
 #comments { background:#40C581; padding:5px }
-.comment-list { background:#8CEDBC }
-.comment { padding:5px }
+.comment { background:#8CEDBC; padding:5px; margin-bottom:5px }
 .comment-details { padding:2px 2px 10px; overflow:auto }
 .comment-details img { float:left; margin-right:10px }
 .comment-form textarea { width:95%; max-width:500px }
