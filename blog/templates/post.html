@@ -22,10 +22,11 @@
             {% endfor %}
         </div>
         <div class="comment-form">
-            <form method="post">
+            <form action="/new-comment" method="post">
                 <p><input type="text" name="username" placeholder="Name *" /></p>
                 <p><input type="email" name="email" placeholder="Email *" /> </p>
                 <textarea name="body" rows="12"></textarea>
+                <input type="hidden" name="post_id" value="{{ post.id }}" />
                 <p><input type="submit" value="Post Comment" /></p>
             </form>
         </div>

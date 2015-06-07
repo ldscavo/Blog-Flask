@@ -89,3 +89,14 @@ def new_post():
         return redirect(url_for('index'))
 
     return render_template('new_post.html')
+
+@app.route('/new-comment', methods=['POST'])
+def new_comment():
+    comment = Comment(request.form['post_id'],
+            request.form['username'],
+            request.form['email'],
+            request.form['body'])
+    db.session.add(comment)
+    db.session.commit()
+
+    return redirect("/post/{}#comments".format(comment.post_id))

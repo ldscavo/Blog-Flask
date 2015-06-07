@@ -67,8 +67,8 @@ class Comment(db.Model):
     post = db.relationship('Post',
             backref = db.backref('comments', lazy = 'dynamic'))
 
-    def __init__(self, post, username, email, body):
-        self.post = post
+    def __init__(self, post_id, username, email, body):
+        self.post_id = post_id
         self.username = username
         self.email = email
         self.email_md5 = hashlib.md5(email).hexdigest()
