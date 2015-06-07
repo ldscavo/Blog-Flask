@@ -9,7 +9,7 @@ a:hover { text-decoration:underline }
 input[type=text],
 input[type=email],
 input[type=password] { border:1px solid #428CB8; background:#F1FAFF; height:20px; padding:5px; font-size:1.0rem }
-textarea { border:1px solid #428CB8; background:#F1FAFF; resize:none }
+textarea { border:1px solid #428CB8; background:#F1FAFF; font-family:Gadget, sans-serif; font-size:1rem; resize:none }
 input[type=submit],
 button { border:1px solid #428CB8; background:#66ACD5; color:#F1FAFF; padding:5px 10px; font-weight:bold }
 input[type=submit]:hover,
