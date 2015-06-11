@@ -38,7 +38,19 @@
                     <span class="widget-header">Recent Posts</span>
                     <ul>
                         {% for post in recent_posts: %}
-                        <li><a href="/{{ post.pub_date.strftime('%Y/%m/%d') }}/{{ post.slug }}">{{ post.title }}</a></li>
+                        <li><a href="{{ post.get_url() }}">{{ post.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>                
+                <div class="widget">
+                    <span class="widget-header">Recent Comments</span>
+                    <ul>
+                        {% for comment in recent_comments: %}
+                        <li>
+                            <a href="/{{ comment.post.get_url() }}">
+                                {{ comment.username }} on {{ comment.post.title }}
+                            </a>
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>

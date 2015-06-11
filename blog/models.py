@@ -53,6 +53,13 @@ class Post(db.Model):
 
         self.slug = slug
 
+    def get_url(self):
+        url = "/{0}/{1}".format(
+                self.pub_date.strftime('%Y/%m/%d'),
+                self.slug)
+        return url
+                
+
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 

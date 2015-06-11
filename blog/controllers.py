@@ -10,7 +10,9 @@ from datetime import datetime
 def utility_processor():
     year = datetime.now().year
     posts = Post.query.order_by(desc(Post.pub_date)).limit(3)
-    return dict(current_year=year, recent_posts=posts)
+    comments = Comment.query.order_by(desc(Comment.pub_date)).limit(3)
+
+    return dict(current_year=year, recent_posts=posts, recent_comments=comments)
 
 @app.route('/', endpoint='index')
 def index():

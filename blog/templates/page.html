@@ -5,12 +5,12 @@
 {% for post in posts.items: %}
 <div class="post">
     <h3 class="title">
-        <a href="/{{ post.pub_date.strftime('%Y/%m/%d') }}/{{ post.slug }}">{{ post.title }}</a>
+        <a href="{{ post.get_url() }}">{{ post.title }}</a>
     </h3>
     <span class="post-details">{{ post.pub_date.strftime('%B %e, %Y') }} by {{ post.author.username }}</span>
     <p>{{ post.body|markdown }}</p>
     <div class="post-comments">
-        <a href="/{{ post.pub_date.strftime('%Y/%m/%d') }}/{{ post.slug }}#comments">{{ post.comments.count() }} Comments</a>
+        <a href="{{ post.get_url() }}#comments">{{ post.comments.count() }} Comments</a>
     </div>
 </div>
 {% endfor %}
