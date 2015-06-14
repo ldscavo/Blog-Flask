@@ -5,6 +5,15 @@ from flask import render_template, flash, session, request, \
 from sqlalchemy.sql import extract, desc
 import hashlib
 from datetime import datetime
+from functools import wraps
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('user_id'):
+            return redirect('/login')
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.context_processor
 def utility_processor():
@@ -39,6 +48,7 @@ def login():
     return render_template('login.html')
 
 @app.route('/logout')
+@login_required
 def logout():
     session.pop('user_id', None)
     flash('You have successfully logged out.')
@@ -79,6 +89,7 @@ def post_by_id(post_id):
     return render_template('post.html', post=post)
 
 @app.route('/posts/new', methods=['GET', 'POST'])
+@login_required
 def new_post():
     if request.method == 'POST':
         post = Post(session['user_id'],
@@ -93,6 +104,7 @@ def new_post():
     return render_template('new_post.html')
 
 @app.route('/post/edit/<int:post_id>', methods=['GET', 'POST'])
+@login_required
 def edit_post(post_id):
     post = Post.query.filter(Post.id == post_id).first_or_404()
 
