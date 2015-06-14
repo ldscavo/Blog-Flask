@@ -92,6 +92,20 @@ def new_post():
 
     return render_template('new_post.html')
 
+@app.route('/post/edit/<int:post_id>', methods=['GET', 'POST'])
+def edit_post(post_id):
+    post = Post.query.filter(Post.id == post_id).first_or_404()
+
+    if request.method == 'POST':
+        post.title = request.form['title']
+        post.body  = request.form['body']
+        db.session.commit()
+
+        flash('Changes saved successfully!')
+        return redirect(post.get_url())
+
+    return render_template('edit_post.html', post=post)
+
 @app.route('/new-comment', methods=['POST'])
 def new_comment():
     comment = Comment(request.form['post_id'],

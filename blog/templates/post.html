@@ -6,6 +6,11 @@
     <h3 class="title">
         <a href="#">{{ post.title }}</a>
     </h3>
+    {% if session.user_id: %}
+    <div class="post-admin">
+        <a href="/post/edit/{{ post.id }}">Edit</a>
+    </div>
+    {% endif %}
     <span class="post-details">{{ post.pub_date.strftime('%B %e, %Y') }} by {{ post.author.username }}</span>
     <p>{{ post.body|markdown }}</p>
     <div id="comments">
