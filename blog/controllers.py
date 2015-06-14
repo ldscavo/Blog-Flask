@@ -118,6 +118,20 @@ def edit_post(post_id):
 
     return render_template('edit_post.html', post=post)
 
+@app.route('/post/delete/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.filter(Post.id == post_id).first_or_404()
+
+    if request.method == 'POST':
+        db.session.delete(post)
+        db.session.commit()
+
+        flash('Post deleted successfully!')
+        return redirect(url_for('index'))
+
+    return render_template('delete_post.html', post=post)
+
 @app.route('/new-comment', methods=['POST'])
 def new_comment():
     comment = Comment(request.form['post_id'],

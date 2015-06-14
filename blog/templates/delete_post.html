@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Delete Post{% endblock %}
+{% block body %}
+
+<h3 class="title">Delete Post</h3>
+<p>Are you sure you want to delete "{{ post.title }}"?
+<a href="{{ post.get_url() }}">Cancel</a>
+<form method="post">
+    <input type="submit" value="Delete Post" />
+</form>
+
+{% endblock %}

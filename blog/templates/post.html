@@ -9,6 +9,7 @@
     {% if session.user_id: %}
     <div class="post-admin">
         <a href="/post/edit/{{ post.id }}">Edit</a>
+        <a href="/post/delete/{{ post.id }}">Delete</a>
     </div>
     {% endif %}
     <span class="post-details">{{ post.pub_date.strftime('%B %e, %Y') }} by {{ post.author.username }}</span>
