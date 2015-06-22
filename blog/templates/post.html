@@ -6,12 +6,23 @@
     <h3 class="title">
         <a href="#">{{ post.title }}</a>
     </h3>
+    {% if session.user_id: %}
+    <div class="post-admin">
+        <a href="/post/edit/{{ post.id }}">Edit</a>
+        <a href="/post/delete/{{ post.id }}">Delete</a>
+    </div>
+    {% endif %}
     <span class="post-details">{{ post.pub_date.strftime('%B %e, %Y') }} by {{ post.author.username }}</span>
     <p>{{ post.body|markdown }}</p>
     <div id="comments">
         <div class="comment-list">
             {% for comment in post.comments: %}
             <div class="comment">
+                {% if session.user_id: %}
+                <div class="post-admin">
+                    <a href="/comment/delete/{{ comment.id }}">Delete</a>
+                </div>
+                {% endif %}
                 <div class="comment-details">
                     <img src="http://gravatar.com/avatar/{{ comment.email_md5 }}?d=mm&r=pg&s=50" alt=""/>
                     {{ comment.username }}<br />
