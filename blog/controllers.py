@@ -142,3 +142,18 @@ def new_comment():
     db.session.commit()
 
     return redirect("/post/{}#comments".format(comment.post_id))
+
+@app.route('/comment/delete/<int:comment_id>', methods=['GET', 'POST'])
+@login_required
+def delete_comment(comment_id):
+    comment = Comment.query.filter(Comment.id == comment_id).first_or_404()
+
+    if request.method == 'POST':
+        redirect_url = comment.post.get_url()
+        db.session.delete(comment)
+        db.session.commit()
+
+        flash('Comment deleted successfully!')
+        return redirect(redirect_url)
+
+    return render_template('delete_comment.html', comment=comment)
