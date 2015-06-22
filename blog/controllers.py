@@ -33,6 +33,16 @@ def page(page):
 
     return render_template('page.html', posts=posts)
 
+@app.route('/search')
+def search():
+    query = request.args.get('q')
+    page = 1
+    if request.args.get('page'):
+        page = request.args.get('page')
+
+    matching_posts = Post.query.whoosh_search(query).paginate(page, per_page=3)
+    return render_template('search.html', query=query,  posts=matching_posts)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':

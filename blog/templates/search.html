@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}"{{ query }}"{% endblock %}
+{% block body %}
+
+<h4>"{{ query }}" &mdash; Search Results:</h4>
+{% for post in posts.items: %}
+<div class="post">
+    <h3 class="title">
+        <a href="{{ post.get_url() }}">{{ post.title }}</a>
+    </h3>    
+    {% if session.user_id: %}
+    <div class="post-admin">
+        <a href="/post/edit/{{ post.id }}">Edit</a>
+        <a href="/post/delete/{{ post.id }}">Delete</a>
+    </div>
+    {% endif %}
+    <span class="post-details">{{ post.pub_date.strftime('%B %e, %Y') }} by {{ post.author.username }}</span>
+    <p>{{ post.body|markdown }}</p>
+    <div class="post-comments">
+        <a href="{{ post.get_url() }}#comments">{{ post.comments.count() }} Comments</a>
+    </div>
+</div>
+{% endfor %}
+
+{% if not posts.items: %}
+<p>No search results found.</p>
+{% endif %}
+
+<div class="pages">
+    {% if posts.has_prev: %}
+    <a href="/search?q={{ query }}&page={{ posts.prev_num }}">&laquo; Previous</a>
+    {% endif %}
+    {% for page in posts.iter_pages(): %}
+        {% if posts.page == page: %}
+        &nbsp;{{ page }}&nbsp;
+        {% else: %}
+        &nbsp;<a href="/search?q={{ query }}&page={{ page }}">{{ page }}</a>&nbsp;
+        {% endif %}
+    {% endfor %}
+    {% if posts.has_next: %}
+    <a href="/search?q={{ query }}&page={{ posts.next_num }}">Next &raquo;</a>
+    {% endif %}
+</div>
+
+{% endblock %}
