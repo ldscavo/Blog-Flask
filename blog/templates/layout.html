@@ -12,13 +12,6 @@
                 <div id="home">
                     <a href="/">Blog.VeryFamousDroid()</a>
                 </div>
-                <div id ="login">
-                    {% if not session.user_id: %}
-                    <a href="{{ url_for('login') }}">Login</a>
-                    {% else: %}
-                    <a href="/posts/new">New Post</a> | <a href="{{ url_for('logout') }}">Logout</a>
-                    {% endif %}
-                </div>
             </div>
         </div>
         <div id="container">
@@ -53,6 +46,15 @@
                         </li>
                         {% endfor %}
                     </ul>
+                </div>
+                <div class="widget">    
+                    <div id ="login">
+                        {% if not session.user_id: %}
+                        <a href="{{ url_for('login') }}">Login</a>
+                        {% else: %}
+                        <a href="/posts/new">New Post</a> | <a href="{{ url_for('logout') }}">Logout</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@ button:hover { background:#428CB8 }
 
 #header a { color:#BCF8DA; text-decoration:none; } 
 #home { font-size:2.0rem; font-weight:bold; float:left }
-#login { float:right; }
+#login { text-align:right }
 
 #container { max-width:1150px; margin:0 auto; clear:both }
 
@@ -37,6 +37,8 @@ button:hover { background:#428CB8 }
 .post p { line-height:150%; font-size:1.05rem }
 .title { font-size:1.5rem; margin:5px 0; font-weight:normal }
 .post-details { font-size:0.8rem; margin:5px 0; }
+.post-admin { float:right }
+.post-admin a { margin:0 5px }
 
 #comments { background:#40C581; padding:5px }
 .comment { background:#8CEDBC; padding:5px; margin-bottom:5px }
