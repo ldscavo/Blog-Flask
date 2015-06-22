@@ -18,6 +18,11 @@
         <div class="comment-list">
             {% for comment in post.comments: %}
             <div class="comment">
+                {% if session.user_id: %}
+                <div class="post-admin">
+                    <a href="/comment/delete/{{ comment.id }}">Delete</a>
+                </div>
+                {% endif %}
                 <div class="comment-details">
                     <img src="http://gravatar.com/avatar/{{ comment.email_md5 }}?d=mm&r=pg&s=50" alt=""/>
                     {{ comment.username }}<br />

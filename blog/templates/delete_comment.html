@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Delete Comment{% endblock %}
+{% block body %}
+
+<h3 class="title">Delete Comment</h3>
+<p>Are you sure you want to delete the comment by "{{ comment.username }}"?
+<a href="{{ comment.post.get_url() }}">Cancel</a>
+<form method="post">
+    <input type="submit" value="Delete Post" />
+</form>
+
+{% endblock %}
