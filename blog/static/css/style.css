@@ -29,7 +29,7 @@ button:hover { background:#428CB8 }
 #footer { background:#BCF8DA; height:20px; padding:10px; margin-top:25px }
 #footer-content { max-width:1150px; margin:0 auto }
 
-.message { width:450px; margin:0 auto; border:1px solid #000; text-align:center }
+.message { background:#9DEC4C; width:450px; margin:0 auto; padding:5px; text-align:center }
 
 .new-post { height:150px }
 
