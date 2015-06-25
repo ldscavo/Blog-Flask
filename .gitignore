@@ -1,4 +1,3 @@
-blog/config.py
 *.pyc
 venv
 search.db
