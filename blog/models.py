@@ -35,7 +35,12 @@ class Post(db.Model):
     
     slug = db.Column(db.String(80))
     pub_date = db.Column(db.DateTime)
-    
+   
+    comments = db.relationship('Comment',
+            lazy='dynamic',
+            cascade='all,delete',
+            backref='post')
+
     def __init__(self, author_id, title, body):
         self.author_id = author_id
         self.title = title
@@ -74,8 +79,6 @@ class Comment(db.Model):
     pub_date = db.Column(db.DateTime)
 
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
-    post = db.relationship('Post',
-            backref = db.backref('comments', lazy = 'dynamic'))
 
     def __init__(self, post_id, username, email, body):
         self.post_id = post_id
