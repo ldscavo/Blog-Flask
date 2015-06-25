@@ -25,6 +25,7 @@
 <p>No posts here!</p>
 {% endif %}
 
+{% if posts.pages > 1: %}
 <div class="pages">
     {% if posts.has_prev: %}
     <a href="/page/{{ posts.prev_num }}">&laquo; Previous</a>
@@ -40,5 +41,6 @@
     <a href="/page/{{ posts.next_num }}">Next &raquo;</a>
     {% endif %}
 </div>
+{% endif %}
 
 {% endblock %}

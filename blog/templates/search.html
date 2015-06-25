@@ -26,6 +26,7 @@
 <p>No search results found.</p>
 {% endif %}
 
+{% if posts.pages > 1: %}
 <div class="pages">
     {% if posts.has_prev: %}
     <a href="/search?q={{ query }}&page={{ posts.prev_num }}">&laquo; Previous</a>
@@ -41,5 +42,6 @@
     <a href="/search?q={{ query }}&page={{ posts.next_num }}">Next &raquo;</a>
     {% endif %}
 </div>
+{% endif %}
 
 {% endblock %}
