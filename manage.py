@@ -11,7 +11,10 @@ manager.add_command("shell", Shell())
 
 @manager.command
 def createdb():
-    from blog.models import db
+    from blog.models import db, User
     db.create_all()
+    user = User('admin', 'admin@example.com',  'admin_pw1')
+    db.session.add(user)
+    db.session.commit()
 
 manager.run()
