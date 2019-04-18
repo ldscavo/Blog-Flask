@@ -37,11 +37,13 @@
                 <p><input type="text" name="username" placeholder="Name *" /></p>
                 <p><input type="email" name="email" placeholder="Email *" /> </p>
                 <textarea name="body" rows="12"></textarea>
+                <div class="g-recaptcha" data-sitekey="{{ captcha_key }}"></div>
                 <input type="hidden" name="post_id" value="{{ post.id }}" />
                 <p><input type="submit" value="Post Comment" /></p>
             </form>
         </div>
     </div>
 </div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 {% endblock %}

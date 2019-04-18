@@ -6,6 +6,8 @@ from sqlalchemy.sql import extract, desc
 import hashlib
 from datetime import datetime
 from functools import wraps
+import requests
+import json
 
 def login_required(f):
     @wraps(f)
@@ -90,14 +92,16 @@ def post(year, month, day, slug):
             extract('month', Post.pub_date) == month,
             extract('day', Post.pub_date) == day,
             Post.slug == slug).first_or_404()
-    
-    return render_template('post.html', post=post)
+    captcha_key = app.config['RECAPTCHA_SITE_KEY']
+
+    return render_template('post.html', post=post, captcha_key=captcha_key)
 
 @app.route('/post/<int:post_id>')
 def post_by_id(post_id):
     post = Post.query.filter(Post.id == post_id).first_or_404()
+    captcha_key = app.config['RECAPTCHA_SITE_KEY']
 
-    return render_template('post.html', post=post)
+    return render_template('post.html', post=post, captcha_key=captcha_key)
 
 @app.route('/posts/new', methods=['GET', 'POST'])
 @login_required
@@ -145,6 +149,18 @@ def delete_post(post_id):
 
 @app.route('/new-comment', methods=['POST'])
 def new_comment():
+    # check for a valid captcha
+    captcha_validation_params = {
+        'secret': app.config['RECAPTCHA_SECRET_KEY'],
+        'response': request.form['g-recaptcha-response']
+    }
+    
+    captcha_validation_request = requests.post('https://www.google.com/recaptcha/api/siteverify', params=captcha_validation_params)
+    
+    if not json.loads(captcha_validation_request.text)['success']:
+        flash('Error: could not validate captcha.')
+        return redirect("/post/{}".format(request.form['post_id']))
+
     comment = Comment(request.form['post_id'],
             request.form['username'],
             request.form['email'],
