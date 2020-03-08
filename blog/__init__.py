@@ -1,9 +1,7 @@
 from flask import Flask
-from flask.ext.markdown import Markdown
+from flaskext.markdown import Markdown
 
 app = Flask(__name__)
-
-#from models import *
 
 app.debug = True
 app.config.from_pyfile('config.py')
