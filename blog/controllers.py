@@ -49,20 +49,25 @@ def search():
 def login():
     if request.method == 'POST':
         password_hashed = hashlib.sha512(request.form['password']).hexdigest()
-        user = User.query.filter_by(username=request.form['username'],
+        user = User.query.filter_by(
+                username=request.form['username'],
                 passwordhash=password_hashed).first()
+
         if user is not None:
             session['user_id'] = user.id
+
             flash('You have successfully logged in!')
             return redirect(url_for('index'))
         else:
             flash('Username or password is not correct!')
+
     return render_template('login.html')
 
 @app.route('/logout')
 @login_required
 def logout():
     session.pop('user_id', None)
+
     flash('You have successfully logged out.')
     return redirect(url_for('index'))
 
@@ -73,9 +78,11 @@ def register():
         if request.form['password'] != request.form['password-confirm']:
             flash('Passwords do not match.')
             return render_template('register.html')
+
         user = User(request.form['username'],
                 request.form['email'],
                 request.form['password'])
+
         db.session.add(user)
         db.session.commit()
         session['user_id'] = user.id
@@ -92,6 +99,7 @@ def post(year, month, day, slug):
             extract('month', Post.pub_date) == month,
             extract('day', Post.pub_date) == day,
             Post.slug == slug).first_or_404()
+
     captcha_key = app.config['RECAPTCHA_SITE_KEY']
 
     return render_template('post.html', post=post, captcha_key=captcha_key)
@@ -107,9 +115,11 @@ def post_by_id(post_id):
 @login_required
 def new_post():
     if request.method == 'POST':
-        post = Post(session['user_id'],
+        post = Post(
+                session['user_id'],
                 request.form['title'],
                 request.form['body'])
+
         db.session.add(post)
         db.session.commit()
 
@@ -155,7 +165,9 @@ def new_comment():
         'response': request.form['g-recaptcha-response']
     }
     
-    captcha_validation_request = requests.post('https://www.google.com/recaptcha/api/siteverify', params=captcha_validation_params)
+    captcha_validation_request = requests.post(
+        'https://www.google.com/recaptcha/api/siteverify',
+        params=captcha_validation_params)
     
     if not json.loads(captcha_validation_request.text)['success']:
         flash('Error: could not validate captcha.')
@@ -165,6 +177,7 @@ def new_comment():
             request.form['username'],
             request.form['email'],
             request.form['body'])
+
     db.session.add(comment)
     db.session.commit()
 
