@@ -47,21 +47,25 @@ def search():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        password_hashed = hashlib.sha512(request.form['password']).hexdigest()
-        user = User.query.filter_by(
-                username=request.form['username'],
-                passwordhash=password_hashed).first()
+    if request.method != 'POST':
+        return render_template('login.html')
+    
+    password_hashed = hashlib.sha512(request.form['password'].encode('utf-8')).hexdigest()
+    
+    user = User.query.filter_by(
+            username=request.form['username'],
+            passwordhash=password_hashed).first()
 
-        if user is not None:
-            session['user_id'] = user.id
+    if user is not None:
+        session['user_id'] = user.id
 
-            flash('You have successfully logged in!')
-            return redirect(url_for('index'))
-        else:
-            flash('Username or password is not correct!')
+        flash('You have successfully logged in!')
+        return redirect(url_for('index'))
+    else:
+        flash('Username or password is not correct!')
+        return render_template('login.html')
 
-    return render_template('login.html')
+    
 
 @app.route('/logout')
 @login_required
@@ -93,19 +97,20 @@ def post_by_id(post_id):
 @app.route('/posts/new', methods=['GET', 'POST'])
 @login_required
 def new_post():
-    if request.method == 'POST':
-        post = Post(
-                session['user_id'],
-                request.form['title'],
-                request.form['body'])
+    if request.method != 'POST':
+        post = Post(session['user_id'], '', '')
+        return render_template('post_form.html', post=post)
 
-        db.session.add(post)
-        db.session.commit()
+    post = Post(
+            session['user_id'],
+            request.form['title'],
+            request.form['body'])
 
-        flash('Published successfully!')
-        return redirect(url_for('index'))
+    db.session.add(post)
+    db.session.commit()
 
-    return render_template('new_post.html')
+    flash('Published successfully!')
+    return redirect(url_for('index'))
 
 @app.route('/post/edit/<int:post_id>', methods=['GET', 'POST'])
 @login_required
@@ -120,7 +125,7 @@ def edit_post(post_id):
         flash('Changes saved successfully!')
         return redirect(post.get_url())
 
-    return render_template('edit_post.html', post=post)
+    return render_template('post_form.html', post=post)
 
 @app.route('/post/delete/<int:post_id>', methods=['GET', 'POST'])
 @login_required
