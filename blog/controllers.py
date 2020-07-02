@@ -71,27 +71,6 @@ def logout():
     flash('You have successfully logged out.')
     return redirect(url_for('index'))
 
-@app.route('/register', methods=['GET', 'POST'])
-@login_required
-def register():
-    if request.method == 'POST':
-        if request.form['password'] != request.form['password-confirm']:
-            flash('Passwords do not match.')
-            return render_template('register.html')
-
-        user = User(request.form['username'],
-                request.form['email'],
-                request.form['password'])
-
-        db.session.add(user)
-        db.session.commit()
-        session['user_id'] = user.id
-
-        flash('You have been registered!')
-        return redirect(url_for('index'))
-
-    return render_template('register.html')
-
 @app.route('/<int:year>/<int:month>/<int:day>/<string:slug>')
 def post(year, month, day, slug):
     post = Post.query.filter(
