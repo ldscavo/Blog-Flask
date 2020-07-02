@@ -1,10 +1,13 @@
-from flask.ext.sqlalchemy import SQLAlchemy
-import flask.ext.whooshalchemy as whooshalchemy 
+from flask_sqlalchemy import SQLAlchemy
+from flask_msearch import Search
 from datetime import datetime
 from blog import app
 import hashlib
 
 db = SQLAlchemy(app)
+
+search = Search(db=db)
+search.init_app(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -90,5 +93,3 @@ class Comment(db.Model):
 
     def __repr__(self):
         return '<Category %r>' % self.username
-
-whooshalchemy.whoosh_index(app, Post)

@@ -3,18 +3,22 @@ load_dotenv(find_dotenv())
 
 import os
 
+# Settings from env
 SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
-DEBUG_TB_INTERCEPT_REDIRECTS = False
-
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-
 SECRET_KEY = os.environ.get('SECRET_KEY')
-
-WHOOSH_BASE = 'search.db'
-
-DEBUG = os.environ.get('DEBUG')
 
 RECAPTCHA_SECRET_KEY = os.environ.get('RECAPTCHA_SECRET_KEY')
 
 RECAPTCHA_SITE_KEY = os.environ.get('RECAPTCHA_SITE_KEY')
+
+DEBUG = os.environ.get('DEBUG')
+
+# Settings that don't change
+DEBUG_TB_INTERCEPT_REDIRECTS = False
+
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+WHOOSH_BASE = 'search.db'
+
+MSEARCH_BACKEND = 'whoosh'

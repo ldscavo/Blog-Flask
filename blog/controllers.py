@@ -42,7 +42,7 @@ def search():
     if request.args.get('page'):
         page = request.args.get('page')
 
-    matching_posts = Post.query.whoosh_search(query).paginate(page, per_page=3)
+    matching_posts = Post.query.msearch(query).paginate(page, per_page=3)
     return render_template('search.html', query=query,  posts=matching_posts)
 
 @app.route('/login', methods=['GET', 'POST'])

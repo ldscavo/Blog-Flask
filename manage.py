@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from flask.ext.script import Manager, Shell, Server
+from flask_script import Manager, Shell, Server
 from blog import app
 
 manager = Manager(app)
